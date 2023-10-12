@@ -1,0 +1,25 @@
+management:
+  health:
+    readinessState:
+      enabled: 'true'
+    livenessState:
+      enabled: 'true'
+  endpoint:
+    health:
+      probes:
+        enabled: 'true'
+      enabled: 'true'
+      show-details: always
+      show-components: always
+    info:
+      enabled: 'true'
+  endpoints:
+    enabled-by-default: 'false'
+    web:
+      base-path: '/materials-api/actuators'
+    jmx:
+      exposure:
+        include: health,info
+springdoc:
+  swagger-ui:
+    path: /api-docs
