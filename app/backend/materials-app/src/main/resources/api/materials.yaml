@@ -1,0 +1,128 @@
+openapi: 3.0.2
+
+info:
+  version: 1.0.0
+  title: Simple API
+  description: A simple API to illustrate OpenAPI concepts
+
+servers:
+  - url: /material-api/v1
+
+security:
+  - BasicAuth: []
+
+paths:
+  /materials:
+    get:
+      description: Returns a list of materials 
+      parameters:
+        #  ----- Added line  ------------------------------------------
+        - $ref: '#/components/parameters/PageLimit'
+        - $ref: '#/components/parameters/PageOffset'
+        #  ---- /Added line  ------------------------------------------
+      responses:
+        '200':
+          description: Successfully returned a list of materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  #  ----- Added line  --------------------------------
+                  $ref: '#/components/schemas/Material'
+                  #  ---- /Added line  --------------------------------
+        '400':
+          #  ----- Added line  ----------------------------------------
+          $ref: '#/components/responses/400Error'
+          #  ---- /Added line  ----------------------------------------
+
+    post:
+      description: Lets a user post a new material
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              #  ----- Added line  ------------------------------------
+              $ref: '#/components/schemas/Material'
+              #  ---- /Added line  ------------------------------------
+      responses:
+        '200':
+          description: Successfully created a new artist
+        '400':
+          #  ----- Added line  ----------------------------------------
+          $ref: '#/components/responses/400Error'
+          #  ---- /Added line  ----------------------------------------    
+
+  /materials/{id}:
+    get:
+      description: Obtain information about an material from it's unique id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          
+      responses:
+        '200':
+          description: Successfully returned an material
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  material_name:
+                    type: string
+                  material_id:
+                    type: string
+                
+        '400':
+          #  ----- Added line  ----------------------------------------
+          $ref: '#/components/responses/400Error'
+          #  ---- /Added line  ----------------------------------------     
+
+components:
+  # securitySchemes:
+  #   BasicAuth:
+  #     type: http
+  #     scheme: basic
+
+  schemas:
+    Material:
+      type: object
+      required:
+        - username
+      properties:
+        material_name:
+          type: string
+        material_id:
+          type: string
+
+  #  ----- Added lines  ----------------------------------------
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      schema:
+        type: integer
+      
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the artists to be displayed
+      schema:
+        type: integer
+
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+  #  ---- /Added lines  ----------------------------------------
