@@ -21,9 +21,15 @@ management:
       exposure:
         include: health,info
 
+
 springdoc:
   swagger-ui:
     path: /api-docs
+
+spring:
+  messages:
+    basename: internationalization/messages
+    encoding: UTF-8
 
 logging:
   file:
