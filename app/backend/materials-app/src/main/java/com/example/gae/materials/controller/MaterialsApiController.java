@@ -2,7 +2,10 @@ package com.example.gae.materials.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +23,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/materials-api/v1")
 public class MaterialsApiController implements MaterialsApi {
     
+    private static Logger LOGGER = LoggerFactory.getLogger(MaterialsApiController.class);
+
     @Override 
     public ResponseEntity<List<Material>> materialsGet(
         @Parameter(name = "limit", description = "Limits the number of items on a page", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false) Integer limit,
         @Parameter(name = "offset", description = "Specifies the page number of the artists to be displayed", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false) Integer offset
     ){
         List<Material> list = new ArrayList<Material>();
+        
+        LOGGER.info("Materials Get invoked");
+        
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

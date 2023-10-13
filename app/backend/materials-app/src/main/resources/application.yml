@@ -20,6 +20,26 @@ management:
     jmx:
       exposure:
         include: health,info
+
 springdoc:
   swagger-ui:
     path: /api-docs
+
+logging:
+  file:
+    name: ./logs/materials-application.log
+    clean-history-on-start: false
+  group:
+  # Spring Boot includes the following pre-defined logging groups that can be used out-of-the-box: web sql
+    tomcat: "org.apache.catalina,org.apache.coyote,org.apache.tomcat"
+    gae: "com.example.gae"
+  level:
+    root: "warn"
+    tomcat: "warn"
+    gae: "info"
+    web: "debug"
+    sql: "error"
+  logback:
+    rollingpolicy:
+      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
+      max-file-size: 10MB
