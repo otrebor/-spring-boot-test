@@ -11,6 +11,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 public class InternationalizationConfiguration {
 
     @Bean
+    @SuppressWarnings("DesignForExtension")
     LocaleResolver localeResolver() {
         // Options: FixedLocaleResolver, AcceptHeaderLocaleResolver,
         // SessionLocaleResolver, CookieLocaleResolver
@@ -20,6 +21,7 @@ public class InternationalizationConfiguration {
     }
 
     @Bean
+    @SuppressWarnings("DesignForExtension")
     LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("language");

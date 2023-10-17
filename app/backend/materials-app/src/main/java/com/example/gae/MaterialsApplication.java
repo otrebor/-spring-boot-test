@@ -9,19 +9,18 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @SpringBootApplication
 public class MaterialsApplication implements WebMvcConfigurer {
 
-	private final LocaleChangeInterceptor localeChangeInterceptor;
+    private final LocaleChangeInterceptor localeChangeInterceptor;
 
-	public MaterialsApplication(LocaleChangeInterceptor localeChangeInterceptor) {
-		this.localeChangeInterceptor = localeChangeInterceptor;
+    public MaterialsApplication(final LocaleChangeInterceptor localeChangeInterceptorIn) {
+		this.localeChangeInterceptor = localeChangeInterceptorIn;
 	}
 
 	@Override
-	public void addInterceptors(InterceptorRegistry interceptorRegistry) {
+	public final void addInterceptors(final InterceptorRegistry interceptorRegistry) {
 		interceptorRegistry.addInterceptor(localeChangeInterceptor);
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		SpringApplication.run(MaterialsApplication.class, args);
 	}
-
 }
