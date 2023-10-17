@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gae.api.materials.controller.MaterialsApi;
 import com.example.gae.api.materials.model.Material;
-import com.example.gae.common.services.GetTranslatedTextService;
-import com.example.gae.framework.utilities.GlobalConstants;
+import com.example.gae.common.framework.services.GetTranslatedTextService;
+import com.example.gae.common.framework.utilities.GlobalConstants;
 
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -40,7 +40,11 @@ public class MaterialsApiController implements MaterialsApi {
         LOGGER.info("Materials Get invoked");
         // The proxy has a problem with final, i use the getter to bypass it
         LOGGER.info(this.getGetTranslatedTextService().invoke("test"));
-
+        Material material = new Material();
+        material.setMaterialName("gold");
+        material.setMaterialId("1");
+        list.add(material);
+        
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

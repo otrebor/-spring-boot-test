@@ -1,4 +1,4 @@
-package com.example.gae.framework.configuration;
+package com.example.gae.common.framework.configuration;
 
 import java.util.Locale;
 import org.springframework.context.annotation.Bean;

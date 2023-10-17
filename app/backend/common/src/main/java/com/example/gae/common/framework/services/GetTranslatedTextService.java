@@ -1,4 +1,4 @@
-package com.example.gae.common.services;
+package com.example.gae.common.framework.services;
 
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
