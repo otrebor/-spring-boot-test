@@ -16,6 +16,7 @@
 		<project.build.sourceDirectory>src/main/java</project.build.sourceDirectory>
 		<project.build.testSourceDirectory>src/test/java</project.build.testSourceDirectory>
 		<gae.api-names.materials>materials</gae.api-names.materials>
+		<gae.api-names.orders>orders</gae.api-names.orders>
 	</properties>
 
 	<parent>
@@ -170,6 +171,48 @@
 						</configuration>
 					</execution>
 
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<id>buildOrdersApi</id>
+						
+						<configuration>
+							<inputSpec>${basedir}/src/main/resources/api/${gae.api-names.orders}.yaml</inputSpec>
+							<!--https://openapi-generator.tech/docs/generators/spring -->
+							<generatorName>spring</generatorName>
+							<library>spring-boot</library>
+
+							<modelNameSuffix>${swagger.modelNameSuffix}</modelNameSuffix>
+
+							<generateApis>true</generateApis>
+							<generateApiTests>false</generateApiTests>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateModels>true</generateModels>
+							<generateModelTests>false</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateSupportingFiles>false</generateSupportingFiles>
+
+							<environmentVariables>
+								<supportingFiles>
+									ApiUtil.java
+								</supportingFiles>
+							</environmentVariables>
+
+							<!-- pass any necessary config options -->
+							<configOptions>
+								<interfaceOnly>true</interfaceOnly>
+								<useBeanValidation>true</useBeanValidation>
+								<performBeanValidation>true</performBeanValidation>
+								<modelPackage>${swagger.basePackage}.${gae.api-names.orders}.model</modelPackage>
+								<apiPackage>${swagger.basePackage}.${gae.api-names.orders}.controller</apiPackage>
+								<sourceFolder>/src/main/java</sourceFolder>
+								<implFolder>/src/main/java</implFolder>
+								<serializableModel>true</serializableModel>
+								<useJakartaEe>true</useJakartaEe>
+							</configOptions>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
